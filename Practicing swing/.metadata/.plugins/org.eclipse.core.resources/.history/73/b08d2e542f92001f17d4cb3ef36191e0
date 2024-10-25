@@ -1,0 +1,20 @@
+package practicing_swing_pack;
+
+import javax.swing.ImageIcon;
+
+public class ImageIconArrayExample {
+    public static void main(String[] args) {
+        // Creating an array to store ImageIcon objects
+        ImageIcon[] iconArray = new ImageIcon[3];
+
+        // Initializing ImageIcons with image paths
+        iconArray[0] = new ImageIcon("path_to_image_1.jpg");
+        iconArray[1] = new ImageIcon("path_to_image_2.jpg");
+        iconArray[2] = new ImageIcon("path_to_image_3.jpg");
+
+        // Accessing the ImageIcons from the array
+        for (int i = 0; i < iconArray.length; i++) {
+            System.out.println("ImageIcon " + (i + 1) + ": " + iconArray[i].toString());
+        }
+    }
+}

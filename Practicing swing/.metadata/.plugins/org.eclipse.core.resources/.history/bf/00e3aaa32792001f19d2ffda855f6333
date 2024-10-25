@@ -1,0 +1,116 @@
+package practicing_swing_pack;
+
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+
+class addtest implements ActionListener {
+    JFrame frame;
+    JLabel label;
+    JButton button;
+    JPanel panel;
+    int n; // Counter for the number of tests added
+
+    addtest() {
+        n = 1; // Start with 1 test
+        frame = new JFrame();
+        label = new JLabel();
+        panel = new JPanel();
+        button = new JButton();
+
+        // Frame setup
+        frame.setTitle("Students Grade Calculator"); // Title of frame
+        frame.setSize(1280, 720); // Set frame size
+        frame.setVisible(true); // Make frame visible
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Close on exit
+        frame.setResizable(false); // Disable frame resizing
+
+        // Set frame icon
+        ImageIcon image = new ImageIcon("Icon.png"); // Frame icon
+        frame.setIconImage(image.getImage()); // Set icon image
+
+        // Set frame background color
+        frame.getContentPane().setBackground(new Color(0x123456));
+
+        // Create and set 'plus' button icon
+        ImageIcon plus = new ImageIcon("plus.png");
+        Image plImage = plus.getImage();
+        Image scaledPlusImage = plImage.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+        plus.setImage(scaledPlusImage);
+        button.setIcon(plus);
+        button.setBounds(0, 0, 50, 50);
+        button.setBackground(new Color(0x123959));
+        button.setBorder(BorderFactory.createLineBorder(new Color(0x123959), 0));
+        button.addActionListener(this); // Add action listener for button
+
+        // Label for the button
+        label.add(button);
+        label.setText("Add Test");
+        label.setFont(new Font("Sanserif", Font.BOLD, 12));
+        label.setForeground(Color.WHITE);
+        label.setBounds(50, 50, 400, 500);
+
+        // Panel setup
+        panel.add(label);
+        panel.setLayout(null);
+        panel.setPreferredSize(new Dimension(1180, 620));
+        panel.setBounds(50, 25, 1180, 620);
+        panel.setBackground(new Color(0x123450));
+
+        // Add panel to frame
+        frame.add(panel);
+
+        // Set label alignment
+        label.setVerticalTextPosition(SwingConstants.BOTTOM);
+        label.setHorizontalTextPosition(SwingConstants.CENTER);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == button) {
+            // Load paper icon and scale it
+            ImageIcon paperIcon = new ImageIcon("paper.png");
+            Image paperImg = paperIcon.getImage();
+            Image scaledPaperImg = paperImg.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+            paperIcon.setImage(scaledPaperImg);
+
+            // Dynamically add JLabel and JButton for the new test
+            JLabel newTestLabel = new JLabel("Test " + n); // Label with test number
+            JButton newTestButton = new JButton();
+            newTestButton.setIcon(paperIcon); // Set the icon for the button
+
+            // Set bounds for new components
+            int x = 10 + (n - 1) * 100; // Offset each new label by 100px horizontally
+            int y = 50; // Keep the vertical position constant
+
+            newTestLabel.setBounds(x, y, 100, 100); // Position of new label
+            newTestButton.setBounds(x, y + 100, 50, 50); // Button below the label
+
+            // Add the new label and button to the panel
+            panel.add(newTestLabel);
+            panel.add(newTestButton);
+
+            // Refresh the panel layout after adding new components
+            panel.revalidate();
+            panel.repaint();
+
+            n++; // Increment test counter for next test
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        new addtest(); // Instantiate addtest to run the GUI
+    }
+}

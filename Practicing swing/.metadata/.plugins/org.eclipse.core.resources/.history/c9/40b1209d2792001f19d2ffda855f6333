@@ -1,0 +1,116 @@
+package practicing_swing_pack;
+
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+
+class addtest implements ActionListener {
+    JFrame frame;
+    JLabel label;
+    JButton button;
+    JPanel panel;
+    JLabel[] pl;
+    JButton[] pb;
+    ImageIcon pi;
+    int n;
+
+    addtest() {
+        n = 1;
+        frame = new JFrame();
+        label = new JLabel();
+        panel = new JPanel();
+        button = new JButton();
+
+        frame.setTitle("Students Grade Calculator"); // sets title of frame
+        frame.setSize(1280, 720); // sets the x and y dimensions of frame
+        frame.setVisible(true); // make frame visible
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Ensures that closing the window stops the application
+        frame.setResizable(false); // Prevent resizing of the frame
+
+        // Set frame icon
+        ImageIcon image = new ImageIcon("Icon.png"); // Create an image icon
+        frame.setIconImage(image.getImage()); // Set the icon
+
+        // Set background color
+        frame.getContentPane().setBackground(new Color(0x123456));
+
+        // Add 'plus' button icon
+        ImageIcon plus = new ImageIcon("plus.png");
+        Image pl = plus.getImage();
+        Image rpl = pl.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+        plus.setImage(rpl);
+        button.setIcon(plus);
+        button.setBounds(0, 0, 50, 50);
+        button.setBackground(new Color(0x123959));
+        button.setBorder(BorderFactory.createLineBorder(new Color(0x123959), 0));
+        button.addActionListener(this);
+
+        // Set label properties
+        label.add(button);
+        label.setText("Add Test");
+        label.setFont(new Font("Sanserif", Font.BOLD, 12));
+        label.setForeground(Color.WHITE);
+        label.setBounds(50, 50, 400, 500);
+
+        // Set panel properties
+        panel.add(label);
+        panel.setLayout(null);
+        panel.setPreferredSize(new Dimension(1180, 620));
+        panel.setBounds(50, 25, 1180, 620);
+        panel.setBackground(new Color(0x123450));
+
+        // Add panel to frame
+        frame.add(panel);
+        label.setVerticalTextPosition(SwingConstants.BOTTOM);
+        label.setHorizontalTextPosition(SwingConstants.CENTER);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == button) {
+            pi = new ImageIcon("paper.png");
+            Image pi2 = pi.getImage();
+            pi2 = pi2.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+            pi.setImage(pi2);
+
+            pl = new JLabel[n];
+            pb = new JButton[n];
+            int x = 0, y = 0;
+
+            for (int i = 0; i < n; i++) {
+                pl[i] = new JLabel();
+                pb[i] = new JButton();
+                pb[i].setIcon(pi);
+                pl[i].add(pb[i]);
+                
+                // Only add pl[i] to panel, not to the frame directly
+                panel.add(pl[i]);
+
+                // Set bounds of new components
+                pl[i].setBounds(x, y, 400, 500);
+                x += 40;
+            }
+            panel.revalidate();
+            panel.repaint();
+            
+            n++; // Increment to add new test next time
+        }
+    }
+}
+
+public class Main1 {
+    public static void main(String[] args) {
+        new addtest(); // Create and run the addtest class
+    }
+}
