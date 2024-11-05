@@ -1,0 +1,77 @@
+package studentgradecalculatorsamplepack;
+import java.util.Scanner;
+class Test
+{
+	int n;
+	Scanner sc;
+	Test()
+	{
+		System.out.print("Enter the number of the student: ");
+		sc=new Scanner(System.in);
+		n=sc.nextInt();
+	}
+	String[] name=new String[n] ;
+	String[] Roll_no=new String[n];
+	int[] mark1=new int[n];
+	int[] mark2=new int[n];
+	int[] mark3=new int[n];
+	int[] mark4=new int[n];
+	int[] mark5=new int[n];
+	float[] avg=new float[n];
+	void get_input()
+	{
+		System.out.println(n)
+		Scanner sc=new Scanner(System.in);
+		int i=0;
+		while(i<n)
+		{
+			System.out.print("Enter the name "+i+" : ");
+			name[i]=sc.nextLine();
+			i=i+1;
+		}
+		i=0;
+		while(i<n)
+		{
+			System.out.println("Enter the mark1 for student"+i+" : ");
+			mark1[i]=sc.nextInt();
+			System.out.println("Enter the mark2 for student"+i+" : ");
+			mark2[i]=sc.nextInt();
+			System.out.println("Enter the mark3 for student"+i+" : ");
+			mark3[i]=sc.nextInt();
+			System.out.println("Enter the mark4 for student"+i+" : ");
+			mark4[i]=sc.nextInt();
+			System.out.println("Enter the mark5 for student"+i+" : ");
+			mark5[i]=sc.nextInt();
+			i=i+1;
+		}
+	}
+	void display_average()
+	{
+		statistics  s=new statistics();
+		int i=0;
+		while(i<n)
+		{
+			avg[i]=s.average(mark1[i],mark2[i],mark3[i],mark4[i],mark5[i]);
+		}
+	}
+}
+class statistics
+{
+	float average(int m1,int m2,int m3,int m4,int m5)
+	{
+		float avg=(m1+m2+m3+m4+m5)/5;
+		return avg;
+	}
+	
+}
+public class Main {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Test t[]=new Test[3];
+		t[0]=new Test();
+		t[0].get_input();
+		t[0].display_average();
+	}
+
+}
